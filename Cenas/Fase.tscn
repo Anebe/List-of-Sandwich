@@ -1,0 +1,128 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Cenas/Lista_jogador.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Script/Lista_ingredientes.gd" type="Script" id=2]
+[ext_resource path="res://Script/Fase.gd" type="Script" id=3]
+[ext_resource path="res://Imagens/adicionar.png" type="Texture" id=4]
+[ext_resource path="res://Imagens/remover.png" type="Texture" id=5]
+[ext_resource path="res://Imagens/proximo.png" type="Texture" id=6]
+[ext_resource path="res://Cenas/Lista_pedido.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.364706, 0.305882, 0.235294, 1 )
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 87
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+scancode = 83
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=5]
+scancode = 68
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
+[node name="Node" type="Node"]
+script = ExtResource( 3 )
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -2.0
+split_offset = 215
+dragger_visibility = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Lista_ingredientes" type="ItemList" parent="HSplitContainer"]
+visible = false
+margin_right = 215.0
+margin_bottom = 600.0
+icon_scale = 0.35
+script = ExtResource( 2 )
+
+[node name="HSplitContainer" type="HBoxContainer" parent="HSplitContainer"]
+margin_right = 798.0
+margin_bottom = 600.0
+alignment = 2
+
+[node name="Lista_jogador" parent="HSplitContainer/HSplitContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 593.0
+margin_bottom = 600.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="Lista_pedido" parent="HSplitContainer/HSplitContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 597.0
+margin_right = 798.0
+margin_bottom = 600.0
+size_flags_horizontal = 0
+
+[node name="Tempo_criar_pedido" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.30625
+anchor_top = 0.848333
+anchor_right = 0.7475
+anchor_bottom = 0.975
+size_flags_horizontal = 0
+size_flags_vertical = 0
+columns = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Criar" type="TextureButton" parent="GridContainer"]
+margin_right = 115.0
+margin_bottom = 76.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource( 2 )
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Remover" type="TextureButton" parent="GridContainer"]
+margin_left = 119.0
+margin_right = 234.0
+margin_bottom = 76.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource( 4 )
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Proximo" type="TextureButton" parent="GridContainer"]
+margin_left = 238.0
+margin_right = 353.0
+margin_bottom = 76.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+shortcut = SubResource( 6 )
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[connection signal="item_selected" from="HSplitContainer/Lista_ingredientes" to="." method="_on_Lista_ingredientes_item_selected"]
+[connection signal="timeout" from="Tempo_criar_pedido" to="." method="_on_Tempo_criar_pedido_timeout"]
+[connection signal="button_up" from="GridContainer/Criar" to="." method="_on_Criar_button_up"]
+[connection signal="button_up" from="GridContainer/Remover" to="." method="_on_Remover_button_up"]
+[connection signal="button_up" from="GridContainer/Proximo" to="." method="_on_Proximo_button_up"]

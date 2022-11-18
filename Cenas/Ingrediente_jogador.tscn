@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Script/Ingrediente_jogador.gd" type="Script" id=1]
+[ext_resource path="res://Resource/Imagens_Ingredientes.tres" type="Texture" id=3]
+
+[node name="Ingrediente_jogador" type="Panel"]
+anchor_right = 0.102344
+anchor_bottom = 0.0888889
+mouse_default_cursor_shape = 13
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Ingrediente" type="TextureRect" parent="."]
+anchor_right = 0.999998
+anchor_bottom = 0.796875
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.78125
+anchor_right = 0.999998
+anchor_bottom = 1.0
+size_flags_vertical = 0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.831373, 0.831373, 0.831373, 0.443137 )
+
+[connection signal="gui_input" from="." to="." method="_on_Ingrediente_jogador_gui_input"]
